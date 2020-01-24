@@ -39,13 +39,13 @@
 #define M_CLSE	LCTL(KC_COMM)	// Control + W	Close
 #define M_NEW	LCTL(KC_L)		// Control + N	New
 #define M_REDO	LCTL(KC_T)		// Control + Y	Redo
-#define M_UNDO	LCTL(KC_B)		// Control + Z	Undo
+#define M_UNDO	LCTL(KC_SLSH)	// Control + Z	Undo
 #define M_SLCT 	LCTL(KC_A)		// Control + A	Select All
 #define M_DSLCT LCTL(KC_H)		// Control + D	Deselect
 #define M_QUIT	LCTL(KC_X)		// Control + Q	Quit
 #define M_BOLD	LCTL(KC_N)		// Control + B	Bold
 #define M_HIST	LCTL(KC_J)		// Control + H	History
-#define M_GRUP	LCTL(KC_U)		// Control + G	Group	
+#define M_GRUP	LCTL(KC_U)		// Control + G	Group
 #define M_FIND	LCTL(KC_Y)		// Control + F	Find
 #define M_RLD	LCTL(KC_O)		// Control + R	Reload
 #define M_TAB	LCTL(KC_K)		// Control + T	New Tab
@@ -53,15 +53,18 @@
 #define M_OPEN	LCTL(KC_S)		// Control + O	Open
 #define M_ADRS	LCTL(KC_P)		// Control + l	Focus Address Bar
 #define M_DL	LCTL(KC_C)		// Control + J	View Downloads
+#define M_COPY	LCTL(KC_I)		// Control + C	Copy
+#define M_CUT	LCTL(KC_B)		// Control + X	Cut
+#define M_PSTE	LCTL(KC_DOT)	// Control + V	Paste
 #define M_RUN	LGUI(KC_O)		// Windows + R	Open Run
-#define M_LOCK	LGUI(KC_P)		// Windows + R	Open Run
+#define M_LOCK	LGUI(KC_P)		// Windows + R	Lockscreen
 
-// Right Alt & CTPL act as normal but switch to layer 1 while held
-#define RALT_ 	LT(1,KC_RALT)
-#define RCTRL_ 	LT(1,KC_RCTL)
+// Right Alt & Ctrl act as normal when tapped but switch to layer 1 while held
+#define FN_ALT	LT(1,KC_RALT)
+#define FN_CTRL LT(1,KC_RCTL)
 
 // Force NUMLOCK all the time
-void led_set_keymap(uint8_t usb_led) { 	// Called to check LED lights status upon connection
+void led_set_keymap(uint8_t usb_led) { 		// Called to check LED lights status upon connection
   if (!(usb_led & (1<<USB_LED_NUM_LOCK))) { // Check if NUMLOCK enabled
     register_code(KC_NUMLOCK);				// Simulate NUMLOCK key down stroke
     unregister_code(KC_NUMLOCK); 			// Simulate NUMLOCK key up stroke
@@ -90,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_LSPO          , KC_Z   , KC_X   , KC_C   , KC_V   , KC_B   , KC_N   , KC_M   , KC_COMM, KC_DOT , KC_SLSH, KC_RSPC        , KC_UP  , KC_P1  , KC_P2  , KC_P3  , KC_ENT ,\
 	//├─────────┬────────┴┬───────┴─┬──────┴────────┴────────┴────────┴────────┴────────┴────────┼────────┴───┬────┴───────┬────────┼────────┼────────┼────────┼────────┤ Enter  │
 	//│ Ctrl    │ FN → 1  │ Alt     │ Space                                                      │ Alt        │ CTRL       │ ◄      │ ▼      │ ►      │ 0      │ •      │        │
-		KC_LCTL , MO(1)   , KC_LALT , KC_SPC                                                     , RALT_      ,_, RCTRL_    , KC_LEFT, KC_DOWN, KC_RGHT, KC_P0  , KC_PDOT            
+		KC_LCTL , MO(1)   , KC_LALT , KC_SPC                                                     , FN_ALT     ,_, FN_CTRL    , KC_LEFT, KC_DOWN, KC_RGHT, KC_P0  , KC_PDOT            
 	//└─────────┴─────────┴─────────┴────────────────────────────────────────────────────────────┴────────────┴────────────┴────────┴────────┴────────┴────────┴────────┴────────┘
 	),
 
@@ -110,10 +113,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	   ________      , M_SLCT , M_SAVE , M_DSLCT, M_FIND , M_GRUP , M_HIST , M_DL   , M_LOCK , M_ADRS ,________,________,________            ,________,________,________,         \
 	//├──────────────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───────────┬────────┼────────┼────────┼────────┤────────┤
 	//│                  │ Undo   │ Cut    │ Copy   │ Paste  │ Bold   │ New    │        │        │        │        │                │        │        │        │        │        │
-	   ________          , M_UNDO , KC_CUT , KC_COPY, KC_PSTE, M_BOLD , M_NEW  ,________,________,________,________,________        ,________,________,________,________,________,\
+	   ________          , M_UNDO , M_CUT  , M_COPY , M_PSTE , M_BOLD , M_NEW  ,________,________,________,________,________        ,________,________,________,________,________,\
 	//├─────────┬────────┴┬───────┴─┬──────┴────────┴────────┴────────┴────────┴────────┴────────┼────────┴───┬────┴───────┬────────┼────────┼────────┼────────┼────────┤        │
 	//│ FN → 2  │         │         │ Left OS Key (Windows Key)                                               │            │        │        │        │        │        │        │
-	    MO(2)    ,________ ,________ , KC_LGUI                                                    ,________    ,_,________  ,________,________,________,________,________
+	    MO(2)    ,________ ,________, KC_LGUI                                                    ,________    ,_,________  ,________,________,________,________,________
 	//└─────────┴─────────┴─────────┴────────────────────────────────────────────────────────────┴────────────┴────────────┴────────┴────────┴────────┴────────┴────────┴────────┘
 	),
 	
