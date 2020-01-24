@@ -35,33 +35,33 @@
 #define _ 			KC_NO		// Do Nothing Key
 
 // Macro Shorthand
-#define M_SAVE	LCTRL(KC_SCLN)	// Control + S	Save 
-#define M_CLSE	LCTRL(KC_COMM)	// Control + W	Close
-#define M_NEW	LCTRL(KC_L)		// Control + N	New
-#define M_REDO	LCTRL(KC_T)		// Control + Y	Redo
-#define M_UNDO	LCTRL(KC_B)		// Control + Z	Undo
-#define M_SLCT 	LCTRL(KC_A)		// Control + A	Select All
-#define M_DSLCT LCTRL(KC_H)		// Control + D	Deselect
-#define M_QUIT	LCTRL(KC_X)		// Control + Q	Quit
-#define M_BOLD	LCTRL(KC_N)		// Control + B	Bold
-#define M_HIST	LCTRL(KC_J)		// Control + H	History
-#define M_GRUP	LCTRL(KC_U)		// Control + G	Group	
-#define M_FIND	LCTRL(KC_Y)		// Control + F	Find
-#define M_RLD	LCTRL(KC_O)		// Control + R	Reload
-#define M_TAB	LCTRL(KC_K)		// Control + T	New Tab
-#define M_PRNT	LCTRL(KC_R)		// Control + P	Print
-#define M_OPEN	LCTRL(KC_S)		// Control + O	Open
-#define M_ADRS	LCTRL(KC_P)		// Control + l	Focus Address Bar
-#define M_DL	LCTRL(KC_C)		// Control + J	View Downloads
-#define M_RUN	LGUI(KC_D)		// Windows + R	Open Run
+#define M_SAVE	LCTL(KC_SCLN)	// Control + S	Save 
+#define M_CLSE	LCTL(KC_COMM)	// Control + W	Close
+#define M_NEW	LCTL(KC_L)		// Control + N	New
+#define M_REDO	LCTL(KC_T)		// Control + Y	Redo
+#define M_UNDO	LCTL(KC_B)		// Control + Z	Undo
+#define M_SLCT 	LCTL(KC_A)		// Control + A	Select All
+#define M_DSLCT LCTL(KC_H)		// Control + D	Deselect
+#define M_QUIT	LCTL(KC_X)		// Control + Q	Quit
+#define M_BOLD	LCTL(KC_N)		// Control + B	Bold
+#define M_HIST	LCTL(KC_J)		// Control + H	History
+#define M_GRUP	LCTL(KC_U)		// Control + G	Group	
+#define M_FIND	LCTL(KC_Y)		// Control + F	Find
+#define M_RLD	LCTL(KC_O)		// Control + R	Reload
+#define M_TAB	LCTL(KC_K)		// Control + T	New Tab
+#define M_PRNT	LCTL(KC_R)		// Control + P	Print
+#define M_OPEN	LCTL(KC_S)		// Control + O	Open
+#define M_ADRS	LCTL(KC_P)		// Control + l	Focus Address Bar
+#define M_DL	LCTL(KC_C)		// Control + J	View Downloads
+#define M_RUN	LGUI(KC_O)		// Windows + R	Open Run
 #define M_LOCK	LGUI(KC_P)		// Windows + R	Open Run
 
 // Right Alt & CTPL act as normal but switch to layer 1 while held
-#define RAlt_ LT(1,KC_RALT)
-#define RCTRL_ LT(1,KC_RCTL)
+#define RALT_ 	LT(1,KC_RALT)
+#define RCTRL_ 	LT(1,KC_RCTL)
 
 // Force NUMLOCK all the time
-void led_update_user(uint8_t usb_led) { 	// Called to check LED lights status upon connection
+void led_set_keymap(uint8_t usb_led) { 	// Called to check LED lights status upon connection
   if (!(usb_led & (1<<USB_LED_NUM_LOCK))) { // Check if NUMLOCK enabled
     register_code(KC_NUMLOCK);				// Simulate NUMLOCK key down stroke
     unregister_code(KC_NUMLOCK); 			// Simulate NUMLOCK key up stroke
@@ -90,7 +90,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_LSPO          , KC_Z   , KC_X   , KC_C   , KC_V   , KC_B   , KC_N   , KC_M   , KC_COMM, KC_DOT , KC_SLSH, KC_RSPC        , KC_UP  , KC_P1  , KC_P2  , KC_P3  , KC_ENT ,\
 	//├─────────┬────────┴┬───────┴─┬──────┴────────┴────────┴────────┴────────┴────────┴────────┼────────┴───┬────┴───────┬────────┼────────┼────────┼────────┼────────┤ Enter  │
 	//│ Ctrl    │ FN → 1  │ Alt     │ Space                                                      │ Alt        │ CTRL       │ ◄      │ ▼      │ ►      │ 0      │ •      │        │
-		KC_LCTL , MO(1)   , KC_LALT , KC_SPC                                                     , RALT_      ,_, RCTL_    , KC_LEFT, KC_DOWN, KC_RGHT, KC_P0  , KC_PDOT            
+		KC_LCTL , MO(1)   , KC_LALT , KC_SPC                                                     , RALT_      ,_, RCTRL_    , KC_LEFT, KC_DOWN, KC_RGHT, KC_P0  , KC_PDOT            
 	//└─────────┴─────────┴─────────┴────────────────────────────────────────────────────────────┴────────────┴────────────┴────────┴────────┴────────┴────────┴────────┴────────┘
 	),
 
