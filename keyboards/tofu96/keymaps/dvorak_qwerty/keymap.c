@@ -32,7 +32,6 @@
 
 // Increase Readability
 #define ________ 	KC_TRNS 	// Transparent Key
-#define _ 			KC_NO		// Do Nothing Key
 
 // Macro Shorthand
 #define M_SAVE	LCTL(KC_SCLN)	// Control + S	Save 
