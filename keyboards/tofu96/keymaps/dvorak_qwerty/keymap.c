@@ -65,57 +65,6 @@
 #define M_WL	LGUI(KC_LEFT)	// Windows + ◄	Split Window Left
 #define M_WR	LGUI(KC_RGHT)	// Windows + ►	Split Window Right
 
-// Define Custom Keycodes
-enum custom_keycodes {
-  M_WTL = SAFE_RANGE,
-  M_WBL,
-  M_WTR,
-  M_WBR,
-};
-
-// Custom Keycodes
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-	//  Windows + ▲ ◄	Split Window Top Left
-    case M_WTL:
-		if (record->event.pressed) {
-			register_mods(MOD_BIT(KC_LGUI));
-			tap_code(KC_LEFT);
-			tap_code(KC_UP);
-			unregister_mods(MOD_BIT(KC_LGUI));
-		}
-		break;
-	// Windows + ▼ ◄	Split Window Bottom Left
-	case M_WBL:
-		if (record->event.pressed) {
-			register_mods(MOD_BIT(KC_LGUI));
-			tap_code(KC_LEFT);
-			tap_code(KC_DOWN);
-			unregister_mods(MOD_BIT(KC_LGUI));
-		}
-		break;
-	//  Windows + ▲ ►	Split Window Top Right
-	case M_WTR:
-		if (record->event.pressed) {
-			register_mods(MOD_BIT(KC_LGUI));
-			tap_code(KC_RIGHT);
-			tap_code(KC_UP);
-			unregister_mods(MOD_BIT(KC_LGUI));
-		}
-		break;
-	// Windows + ▼ ►	Split Window Bottom Right
-	case M_WBR:
-		if (record->event.pressed) {
-			register_mods(MOD_BIT(KC_LGUI));
-			tap_code(KC_RIGHT);
-			tap_code(KC_DOWN);
-			unregister_mods(MOD_BIT(KC_LGUI));
-		}
-		break;
-  }
-  return true;
-};
-
 // Right Alt & Ctrl act as normal when tapped but switch to layer 1 while held
 #define FN_ALT	LT(1,KC_RALT)
 #define FN_CTRL LT(1,KC_RCTL)
@@ -147,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_CAPS      , KC_A   , KC_S   , KC_D   , KC_F   , KC_G   , KC_H   , KC_J   , KC_K   , KC_L   , KC_SCLN, KC_QUOT, KC_ENT             , KC_P4  , KC_P5  , KC_P6  ,         \
 	//├──────────────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───────────┬────────┼────────┼────────┼────────┤────────┤
 	//│ Shift            │ Z      │ X      │ C      │ V      │ B      │ N      │ M      │ <      │ >      │ ?      │ Shift          │ ▲      │ 1      │ 2      │ 3      │        │	 
-		KC_LSPO          , KC_Z   , KC_X   , KC_C   , KC_V   , KC_B   , KC_N   , KC_M   , KC_COMM, KC_DOT , KC_SLSH, KC_RSPC        , KC_UP  , KC_P1  , KC_P2  , KC_P3  , KC_ENT ,\
+		KC_LSFT          , KC_Z   , KC_X   , KC_C   , KC_V   , KC_B   , KC_N   , KC_M   , KC_COMM, KC_DOT , KC_SLSH, KC_RSFT        , KC_UP  , KC_P1  , KC_P2  , KC_P3  , KC_ENT ,\
 	//├─────────┬────────┴┬───────┴─┬──────┴────────┴────────┴────────┴────────┴────────┴────────┼────────┴───┬────┴───────┬────────┼────────┼────────┼────────┼────────┤ Enter  │
 	//│ Ctrl    │ FN → 1  │ Alt     │ Space                                                      │ Alt        │ CTRL       │ ◄      │ ▼      │ ►      │ 0      │ •      │        │
 		KC_LCTL , MO(1)   , KC_LALT , KC_SPC                                                     , FN_ALT     , FN_CTRL    , KC_LEFT, KC_DOWN, KC_RGHT, KC_P0  , KC_PDOT            
@@ -164,13 +113,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	   ________,________,________,________,________,________,________,________,________,________,________,________,________,________         ,________,________,________,________,\
 	//├────────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬─────────────┼────────┼────────┼────────┤────────┤
 	//│            │ Quit   │ Close  │  Run   │ Relaod │ New Tab│ Redo   │        │        │ Open   │ Print  │        │        │             │        │        │        │        │
-	   ________    , M_QUIT , M_CLSE , M_RUN  , M_RLD  , M_TAB  , M_REDO ,________,________, M_OPEN , M_PRNT ,________,________,________     , M_WTL  , M_WT   , M_WTR  ,________,\
+	   ________    , M_QUIT , M_CLSE , M_RUN  , M_RLD  , M_TAB  , M_REDO ,________,________, M_OPEN , M_PRNT ,________,________,________     ,________, M_WT   ,________,________,\
 	//├────────────┴─┬──────┴─┬──────┴─┬──────┴─┬──────┴─┬──────┴─┬──────┴─┬──────┴─┬──────┴─┬──────┴─┬──────┴─┬──────┴─┬──────┴─────────────┼────────┼────────┼────────┤        │
 	//│              │ Select │ Save   │Deselect│ Find   │ Group  │ History│Downlaod│ Lock   │ Search │        │        │                    │        │        │        │        │
 	   ________      , M_SLCT , M_SAVE , M_DSLCT, M_FIND , M_GRUP , M_HIST , M_DL   , M_LOCK , M_ADRS ,________,________,________            , M_WL   ,________, M_WR   ,         \
 	//├──────────────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───────────┬────────┼────────┼────────┼────────┤────────┤
 	//│                  │ Undo   │ Cut    │ Copy   │ Paste  │ Bold   │ New    │        │        │        │        │                │        │        │        │        │        │
-	   ________          , M_UNDO , M_CUT  , M_COPY , M_PSTE , M_BOLD , M_NEW  ,________,________,________,________,________        ,________, M_WBL  , M_WB   , M_WBR  ,________,\
+	   ________          , M_UNDO , M_CUT  , M_COPY , M_PSTE , M_BOLD , M_NEW  ,________,________,________,________,________        ,________,________, M_WB   ,________,________,\
 	//├─────────┬────────┴┬───────┴─┬──────┴────────┴────────┴────────┴────────┴────────┴────────┼────────┴───┬────┴───────┬────────┼────────┼────────┼────────┼────────┤        │
 	//│ FN → 2  │         │         │ Left OS Key (Windows Key)                                               │            │        │        │        │        │        │        │
 	    MO(2)    ,________ ,________, KC_LGUI                                                    ,________    ,________    , M_LEFT ,________, M_RGHT ,________,________
