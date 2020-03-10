@@ -98,8 +98,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	//│ Shift            │ Z      │ X      │ C      │ V      │ B      │ N      │ M      │ <      │ >      │ ?      │ Shift          │        │ 1      │ 2      │ 3      │        │	 
 		KC_LSFT          , KC_Z   , KC_X   , KC_C   , KC_V   , KC_B   , KC_N   , KC_M   , KC_COMM, KC_DOT , KC_SLSH, KC_RSFT        , KC_NO  , KC_P1  , KC_P2  , KC_P3  , KC_ENT ,\
 	//├─────────┬────────┴┬───────┴─┬──────┴────────┴────────┴────────┴────────┴────────┴────────┼────────┴───┬────┴───────┬────────┼────────┼────────┼────────┼────────┤ Enter  │
-	//│ Ctrl    │ FN → 1  │ Alt     │ Space                                                      │ Alt        │ CTRL       │        │        │        │  0      │ •      │        │
-		KC_LCTL , MO(1)   , KC_LALT , KC_SPC                                                     , FN_ALT     , FN_CTRL    , KC_NO  , KC_NO  , KC_NO  , KC_P0  , KC_PDOT            
+	//│ Ctrl    │ FN → 1  │ Alt     │ Space                                                      │ FN → 2     │ FN → 2     │        │        │        │  0      │ •      │        │
+		KC_LCTL , MO(1)   , KC_LALT , KC_SPC                                                     , MO(2)      , MO(2)      , KC_NO  , KC_NO  , KC_NO  , KC_P0  , KC_PDOT            
 	//└─────────┴─────────┴─────────┴────────────────────────────────────────────────────────────┴────────────┴────────────┴────────┴────────┴────────┴────────┴────────┴────────┘
 	),
 
