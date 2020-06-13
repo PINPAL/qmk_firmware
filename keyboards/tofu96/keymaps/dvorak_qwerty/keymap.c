@@ -58,6 +58,7 @@
 #define M_RUN	LGUI(KC_O)		// Windows + R	Open Run
 #define M_LOCK	LGUI(KC_P)		// Windows + R	Lockscreen
 #define M_AC	LGUI(KC_A)		// Windows + A	Open Action Center
+#define M_KL	LGUI(KC_SPC)	// Windows + Space Switch Keyboard Layout
 
 #define M_LEFT	SWIN(KC_LEFT)	// Shift + Win + ◄	Move Window Left
 #define M_RGHT	SWIN(KC_RGHT)	// Shift + Win + ►	Move Window Right
@@ -107,8 +108,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	// Main Function Layer
 	[1] = LAYOUT_default(
 	//┌────────┬────────┬────────┬────────┬────────┬────────┬────────┬────────┬────────┬────────┬────────┬────────┬────────┬────────┬────────┬────────┬────────┬────────┬────────┐
-	//│        │        │        │        │        │        │        │        │        │        │        │        │        │ PrntScr│ End    │ Mute   │ Skip ♫ │ Next ♫ │ F23    │
-	   ________,________,________,________,________,________,________,________,________,________,________,________,________, KC_PSCR, KC_END , KC_MUTE, KC_MPRV, KC_MNXT, KC_F23 ,\
+	//│ Layout │        │        │        │        │        │        │        │        │        │        │        │ Insert │ PrntScr│ End    │ Mute   │ Skip ♫ │ Next ♫ │ F23    │
+	    M_KL   ,________,________,________,________,________,________,________,________,________,________,________, KC_INS , KC_PSCR, KC_END , KC_MUTE, KC_MPRV, KC_MNXT, KC_F23 ,\
 	//├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┴────────┼────────┼────────┼────────┼────────┤
 	//│        │        │        │        │        │        │        │        │        │        │        │        │        │                 │ NumLock│        │        │        │
 	   ________,________,________,________,________,________,________,________,________,________,________,________,________,________         , KC_NLCK,________,________,________,\
