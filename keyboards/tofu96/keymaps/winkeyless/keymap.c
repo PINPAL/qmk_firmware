@@ -33,6 +33,24 @@
 // Increase Readability
 #define ________ 	KC_TRNS 	// Transparent Key
 
+// Define custom keycodes
+enum custom_keycodes {
+    M_GDP = SAFE_RANGE, // Macro to type pound symbol
+};
+
+// Function called upon any keypress
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+		// Macro to type pound symbol
+    case M_GDP:
+        if (record->event.pressed) {
+            SEND_STRING(SS_LALT(SS_TAP(X_KP_0) SS_TAP(X_KP_1) SS_TAP(X_KP_6) SS_TAP(X_KP_3)));
+        }
+        break;
+    }
+    return true;
+};
+
 // Macro Shorthand
 #define M_LEFT	SWIN(KC_LEFT)	// Shift + Win + ◄	Move Window Left
 #define M_RGHT	SWIN(KC_RGHT)	// Shift + Win + ►	Move Window Right
@@ -81,8 +99,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	//│        │        │        │        │        │        │        │        │        │        │        │        │ Insert │ PrntScr│ Mute ♫ │ Play ♫ │ Skip ♫ │ Next ♫ │ F23    │
 	   ________,________,________,________,________,________,________,________,________,________,________,________, KC_INS , KC_PSCR, KC_MUTE, KC_MPLY, KC_MPRV, KC_MNXT, KC_F23  ,\
 	//├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┴────────┼────────┼────────┼────────┼────────┤
-	//│        │        │        │        │        │        │        │        │        │        │        │        │        │                 │ NumLock│        │        │        │
-	   ________,________,________,________,________,________,________,________,________,________,________,________,________,________         , KC_NLCK,________,________,________,\
+	//│        │        │        │        │ £      │        │        │        │        │        │        │        │        │                 │ NumLock│        │        │        │
+	   ________,________,________,________, M_GDP ,________,________,________,________,________,________,________,________,________         , KC_NLCK,________,________,________,\
 	//├────────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬────┴───┬─────────────┼────────┼────────┼────────┤────────┤
 	//│Win+Tab     │        │        │        │        │        │        │        │        │        │        │        │        │             │        │        │        │        │
 	   LGUI(KC_TAB),________,________,________,________,________,________,________,________,________,________,________,________,________     ,________,________,________,________,\
